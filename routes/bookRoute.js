@@ -57,4 +57,17 @@ router.get('/:id', async(req, res) => {
         res.status(500).send({message: error.message})
      }
 })
+
+// updating a book
+router.put('/:id', async(req, res) => {
+     try {
+        const {id} = req.params;
+        const body = req.body;
+        const books = await Book.findByIdAndUpdate(id, body, {new: true});
+        return res.status(200).send(books);
+     } catch (error) {
+        console.log(error.message);
+        res.status(500).send({message: error.message})
+     }
+})
 export default router;
